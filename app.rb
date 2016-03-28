@@ -1,15 +1,17 @@
 require 'rubygems'
 require 'sinatra'
 
-UPLOAD_DIR = 'uploads'
-
 post '/upload' do
+  upload_dir_name = 'uploads'
+  Dir.mkdir(upload_dir_name) unless Dir.exist?(upload_dir_name)
+
   filename = params[:file][:filename]
-  mkdir UPLOAD_DIR unless Dir.exist?(UPLOAD_DIR)
-  File.open(UPLOAD_DIR + '/' + filename, "w") do |f|
-    f.write(params['file'][:tempfile].read)
+  # File.open(upload_dir_namee + '/' + filename, "w") do |f|
+  File.open(upload_dir_name + '/' + filename, "w") do |f|
+    f.write(params[:file][:tempfile].read)
   end
-  return '/' + UPLOAD_DIR + '/' + filename
+
+  return '/' + upload_dir_name + '/' + filename
 end
 
 get '/' do
