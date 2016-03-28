@@ -12,7 +12,7 @@ post '/upload' do
   File.open(@upload_dir_name + '/' + filename, "w") do |f|
     f.write(params[:file][:tempfile].read)
   end
-  return '/' + @upload_dir_name + '/' + filename
+  return 'http://' + (ENV['HOST'] || 'localhost') + '/get/' + filename
 end
 
 get '/' do
