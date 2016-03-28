@@ -6,7 +6,6 @@ post '/upload' do
   Dir.mkdir(upload_dir_name) unless Dir.exist?(upload_dir_name)
 
   filename = params[:file][:filename]
-  # File.open(upload_dir_namee + '/' + filename, "w") do |f|
   File.open(upload_dir_name + '/' + filename, "w") do |f|
     f.write(params[:file][:tempfile].read)
   end
