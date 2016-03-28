@@ -4,3 +4,20 @@ html
       input type='file' name='file'
       br
       input type='submit'
+
+    hr
+
+    - if @files
+      h1 File list
+
+      ul
+        - @files_ctime.each do |file|
+          li
+            a href="/get/#{file[:name]}"
+              = file[:name]
+            =< file[:ctime]
+
+
+
+    - else
+      p Nothing uploaded yet
