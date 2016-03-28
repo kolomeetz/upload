@@ -24,3 +24,14 @@ get '/' do
   end
   slim :index
 end
+
+get '/get/:filename' do |filename|
+  filename.delete '/'
+  if File.exist?(@upload_dir_name + '/' + filename)
+    send_file @upload_dir_name + '/' + filename,
+      filename: filename,
+      type: 'Application/octet-stream'
+  else
+    status 404
+  end
+end
